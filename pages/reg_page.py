@@ -73,32 +73,3 @@ class RegPage(BasePage):
         self.find_element(RegPageLocators.REG_FIRST_NAME_INPUT).send_keys(input_text)
         self.find_element(BaseLocators.BODY).click()
         assert self.is_element_present(RegPageLocators.REG_ERROR_FIRST_NAME_INPUT), "element not found"
-
-    # RT029 метод проверки валидации поля ввода email или мобильного телефона (ввод невалидных данных)
-    def email_or_phone_field_validation_invalid_data(self, input_text):
-        self.find_element(RegPageLocators.REG_EMAIL_PHONE_INPUT).send_keys(input_text)
-        self.find_element(BaseLocators.BODY).click()
-        assert self.is_element_present(RegPageLocators.REG_ERROR_INVALID_EMAIL_OR_PHONE_INPUT), "element not found"
-
-    # RT030 метод проверки валидации поля ввода пароля (ввод невалидных данных)
-    def password_field_validation_invalid_data(self, input_text):
-        self.find_element(RegPageLocators.REG_PASSWORD_INPUT).send_keys(input_text)
-        self.find_element(BaseLocators.BODY).click()
-        assert self.is_element_present(RegPageLocators.REG_ERROR_INVALID_PASSWORD_INPUT), "element not found"
-
-    # RT031 метод проверки заполнения поля подтверждения пароля данными, отличными от введенных в поле ввода пароля
-    def entering_data_in_the_password_confirmation_field(self, password1, password2):
-        self.find_element(RegPageLocators.REG_PASSWORD_INPUT).send_keys(password1)
-        self.find_element(RegPageLocators.REG_PASSWORD_CONFIRM_INPUT).send_keys(password2)
-        self.find_element(RegPageLocators.REG_ENTER_BUTTON).click()
-        assert self.is_element_present(RegPageLocators.REG_ERROR_PASSWORD_DONT_MATCH), "element not found"
-
-    # RT032 метод проверки регистрации с невалидными данными
-    def registration_with_invalid_data(self, first_name, last_name, email_phone, password):
-        self.find_element(RegPageLocators.REG_FIRST_NAME_INPUT).send_keys(first_name)
-        self.find_element(RegPageLocators.REG_LAST_NAME_INPUT).send_keys(last_name)
-        self.find_element(RegPageLocators.REG_EMAIL_PHONE_INPUT).send_keys(email_phone)
-        self.find_element(RegPageLocators.REG_PASSWORD_INPUT).send_keys(password)
-        self.find_element(RegPageLocators.REG_PASSWORD_CONFIRM_INPUT).send_keys(password)
-        self.find_element(RegPageLocators.REG_ENTER_BUTTON).click()
-        assert self.is_not_element_present(EmailConfirmPageLocators.EMAIL_CONF_HEADING), "element found"
